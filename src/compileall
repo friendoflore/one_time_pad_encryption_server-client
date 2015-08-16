@@ -1,0 +1,22 @@
+#!/bin/bash
+#	compileall
+# This shell script compiles all of the files associated with the encryption
+# and decryption server and client programs, as well as the key generation 
+# program. The programs compiled are as follows:
+#
+#   Source file 	Object file
+#	-----------		-----------
+#	otp_enc_d.c 	otp_enc_d
+#	otp_enc.c 		otp_enc
+#	otp_dec_d.c 	otp_dec_d
+# 	otp_dec.c 		otp_dec
+#	keygen.c 		keygen
+#
+# All of the source files listed above include the header file enc_dec.h.
+# - # - # - # - # - # - # - #
+
+gcc -o otp_enc_d otp_enc_d.c
+gcc -o otp_enc otp_enc.c
+gcc -o otp_dec_d otp_dec_d.c
+gcc -o otp_dec otp_dec.c
+gcc -o keygen keygen.c
