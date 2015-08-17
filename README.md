@@ -1,19 +1,16 @@
-I. File list
-------------
-otp_enc_d.c		Encryption server implementation
-otp_enc.c		Encryption client implementation
-otp_dec_d.c	 	Decryption server implementation
-otp_dec.c 		Decryption client implementaiton
-keygen.c 		Encryption/Decryption key generation implementation
-enc_dec.h		Header file for all *.c files associated with encryption and
-				decryption.
-compileall		Shell (bash) script for compiling all *.c files.
+# One-Time Pad Encryption & Decryption Servers and Clients
+## I. File list
+otp_enc_d.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption server implementation<br />
+otp_enc.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption client implementation<br />
+otp_dec_d.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decryption server implementation<br />
+otp_dec.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decryption client implementaiton<br />
+keygen.c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Encryption/Decryption key generation implementation<br />
+enc_dec.h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Header file for all *.c files associated with encryption and decryption.<br />
+compileall&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shell (bash) script for compiling all *.c files.<br />
 
+## II. Program instructions
 
-II. Program instructions
-------------------------
-
-A. Brief program overview
+#### A. Brief program overview
 
 This program allows for the encryption and decryption of a plaintext file. The
 only allowable characters that can be encrypted by this program are as follows:
@@ -62,7 +59,7 @@ and self apparent:
 	otp_dec 		Decryption client object file
 	keygen 			Key generation object file
 
-B. Running the key generation program
+#### B. Running the key generation program
 
 The key generation program will produce a random set of characters among:
 
@@ -78,7 +75,7 @@ This program generates the key and outputs it to standard output. In order to
 generate a key to be used by the encryption/decryption clients, redirect the
 output to a key file.
 
-C. Running the encryption server
+#### C. Running the encryption server
 
 The encryption server accepts a TCP connection from the encryption client. The
 user must specify the port on which to wait for connections from the client.
@@ -107,7 +104,7 @@ where the latter is used to run the encryption server in the background. The
 encryption client must also specify a port number in the command line program
 call, where the client's specified port must match the server port number.
 
-D. Running the decryption server
+#### D. Running the decryption server
 
 The decryption server accepts a TCP connection from the decryption client. The
 user must specify the port on which to wait for connections from the client.
@@ -136,7 +133,7 @@ where the latter is used to run the decryption server in the background. The
 decryption client must also specify a port number in the command line program
 call, where the client's specified port must match the server port number.
 
-E. Running the encryption client
+#### E. Running the encryption client
 
 The encryption client connects to the encryption server with a TCP connection.
 The user must specify the port at which the server is waiting for connections.
@@ -171,7 +168,7 @@ create a ciphertext file that can be used by the decryption client, and the
 third creates the ciphertext file but runs in the background instead of the
 foreground.
 
-F. Running the decryption client
+#### F. Running the decryption client
 
 The decryption client connects to the decryption server with a TCP connection.
 The user must specify the port at which the server is waiting for connections.
@@ -205,7 +202,7 @@ where the first will print the deciphered text to standard output, the second
 will create a deciphered text file, and the third creates the derciphered text 
 file but runs in the background instead of the foreground.
 
-G. Communication between server and client
+#### G. Communication between server and client
 
 The client and server for both encryption and decryption communicate over a
 TCP connection. Each message sent is prepended with a 4-byte preamble
@@ -216,7 +213,7 @@ specified in II.I.
 Communication between the server and client alternate with one another, where
 the client sends the first communication after a connection is established.
 
-H. Protocol for sending data between server and client
+#### H. Protocol for sending data between server and client
 
 In creating a message to be sent from either the client or server, a 4-byte
 preamble prepends all other data sent. The first byte of data sent contains
@@ -241,7 +238,7 @@ indicate whether the encryption client tried to encrypt a message using the
 decryption server or if the decryption client tried to decrypt a message
 using the encryption server.
 
-I. Protocol for parsing data between client and server
+#### I. Protocol for parsing data between client and server
 
 When a client prepares a message to send to its server, the message uses the
 4-byte preamble specified above and uses a character to divide the data to be
@@ -252,7 +249,7 @@ For the encryption client, the '^' character is used as the divider, while the
 decryption client uses the '#' character as the divider. The servers then parse
 the data so they can use the data separate from the key received by the client.
 
-J. Encryption procedure
+#### J. Encryption procedure
 
 The encryption server, once the data to be encrypted is separated from the key
 to use for encryption, does a one-time pad encryption on the data using the 
@@ -271,7 +268,7 @@ for encrypting a single character is the following:
 Do this procedure for all values i in the data received and return the
 encrypted data prepended with a 4-byte preamble specified in II.H.
 
-K. Decryption procedure
+#### K. Decryption procedure
 
 The decryption server, once the data to be decrypted is separated from the key
 to use for decryption, does a one-time pad decryption on the data using the 
@@ -293,11 +290,10 @@ decrypted data prepended with a 4-byte preamble specified in II.H. The
 decryption must use the same key as was used in the encryption procedure.
 
 
-III. References
----------------
-A.	Beej's Guide to Network Programming | Using Internet Sockets
-	Brian "Beej Jorgensen" Hall
-	http://beej.us/guide/bgnet/output/html/singlepage/bgnet.html
+## III. References
+#####A. Beej's Guide to Network Programming | Using Internet Sockets
+Brian "Beej Jorgensen" Hall<br />
+http://beej.us/guide/bgnet/output/html/singlepage/bgnet.html
 
 	1. This resource was used for proper syntax and structure for a program
 	implementing internet sockets to accomplish network programming tasks.
@@ -319,9 +315,9 @@ A.	Beej's Guide to Network Programming | Using Internet Sockets
 	information offered in this resource, though the program was ultimately 
 	built to accomplish the operation outlined in II.A-K. 
 
-B. How can I get a file's size in C? [duplicate]
-	Responding user: Greg Hewgill on October 26, 2008
-	http://stackoverflow.com/questions/238603/how-can-i-get-a-files-size-in-c
+##### B. How can I get a file's size in C? [duplicate]
+Responding user: Greg Hewgill on October 26, 2008<br />
+http://stackoverflow.com/questions/238603/how-can-i-get-a-files-size-in-c
 
 	1. This resource was used for the proper syntax and structure for a program
 	obtaining the size of a specific file.
@@ -337,10 +333,9 @@ B. How can I get a file's size in C? [duplicate]
 	function in III.B.2 in conjunction with one another to obtain the file size
 	of the client's requested file.
 
-C. Converting an int into a 4 byte char array (C)
-	Responding user: caf on September 24, 2010, edited by betabandido on
-		June 7, 2012
-	http://stackoverflow.com/questions/3784263/converting-an-int-into-a-4-byte-char-array-c
+##### C. Converting an int into a 4 byte char array (C)
+Responding user: caf on September 24, 2010, edited by betabandido on June 7, 2012<br />
+http://stackoverflow.com/questions/3784263/converting-an-int-into-a-4-byte-char-array-c
 
 	1. This resource was used for the proper syntax and structure for a program
 	implementing the conversion of an integer to a 3-byte char array. This 
@@ -354,12 +349,14 @@ C. Converting an int into a 4 byte char array (C)
 	their communications with a 3-byte measure of the communication in 
 	question.
 
-	3. This resource was instrumental in implementing the the large file transfer protocol of adding a 4-byte preamble to all communications, where
-	the latter 3 bytes of the preamble is a measure of the message size from server to client or from client to server.
+	3. This resource was instrumental in implementing the the large file transfer
+	protocol of adding a 4-byte preamble to all communications, where the latter 
+	3 bytes of the preamble is a measure of the message size from server to client 
+	or from client to server.
 
-D. Python Socket Receive Large Amount of Data
-	Responding user: Adam Rosenfield on July 16, 2013
-	http://stackoverflow.com/questions/17667903/python-socket-receive-large-amount-of-data
+##### D. Python Socket Receive Large Amount of Data
+Responding user: Adam Rosenfield on July 16, 2013<br />
+http://stackoverflow.com/questions/17667903/python-socket-receive-large-amount-of-data
 
 	1. This resource was the motivation for using an n-byte preamble of a
 	hexadecimal measure to ensure reliable large file communication. The
@@ -385,13 +382,13 @@ D. Python Socket Receive Large Amount of Data
 
 	4. This resource was instrumental behind the implementation of the large
 	file transfer functionality of the programs and the idea behind the 
-	transmission of large files between them. This resource aided in building a function that returns all of the received file's contents in one
-	variable, to be processed and parsed by the receiving server or client.
+	transmission of large files between them. This resource aided in building a 
+	function that returns all of the received file's contents in one variable, 
+	to be processed and parsed by the receiving server or client.
 
-E. How to properly convert an unsigned char array into an uint32_t
-	Responding user: cnicutar on August 14, 2011, edited by larsmans on
-		August 14, 2011
-	http://stackoverflow.com/questions/7059299/how-to-properly-convert-an-unsigned-char-array-into-an-uint32-t
+##### E. How to properly convert an unsigned char array into an uint32_t
+Responding user: cnicutar on August 14, 2011, edited by larsmans on August 14, 2011<br />
+http://stackoverflow.com/questions/7059299/how-to-properly-convert-an-unsigned-char-array-into-an-uint32-t
 
 	1. This resource was used for the proper syntax and structure of unpacking
 	an unsigned char array of hexadecimal values from the 4-byte preamble of
@@ -407,9 +404,9 @@ E. How to properly convert an unsigned char array into an uint32_t
 	protocol using the 4-byte preamble, where this resource was used by
 	receiving hosts to unpack the 3-byte file size in the 4-byte preamble.
 
-F.  https://oregonstate.instructure.com/courses/1524722/discussion_topics/7567876
-	(login required)
-	Post by user Benjamin Brewster on August 6, 2015 at 8:49 AM PDT
+##### F. https://oregonstate.instructure.com/courses/1524722/discussion_topics/7567876
+&nbsp;&nbsp;&nbsp;(login required)<br />
+Post by user Benjamin Brewster on August 6, 2015 at 8:49 AM PDT
 
 	1. This resource was used to understand the necessity of prepending the
 	communications between the encryption and decryption servers and clients in
